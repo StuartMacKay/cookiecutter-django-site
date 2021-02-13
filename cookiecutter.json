@@ -1,0 +1,58 @@
+{
+    "site_name": "MySite",
+    "site_dir": "{{ cookiecutter.site_name|lower|replace(' ', '_') }}",
+    "site_app": "{{ cookiecutter.site_dir }}",
+
+    "repository_url": "",
+
+    "python_version": "3.8",
+
+    "author": "Author's full name",
+    "author_email": "Author's email address",
+
+    "create_makefile": "y",
+    "create_virtualenv": "y",
+
+    "ide": [
+        "pycharm",
+        "other"
+    ],
+
+    "code_checker": [
+        "flake8",
+        "pylama",
+        "other"
+    ],
+
+    "use_black": "y",
+    "use_isort": "y",
+
+    "use_bumpversion": "y",
+    "use_readthedocs": "y",
+    "use_coverage": "y",
+
+    "sign_commits": "y",
+    "sign_tags": "y",
+
+    "sphinx_theme": [
+        "sphinx-rtd-theme",
+        "alabaster",
+        "other"
+    ],
+
+    "test_runner": [
+        "django",
+        "pytest",
+        "other"
+    ],
+
+    "cms": [
+        "none",
+        "wagtail"
+    ],
+
+    "use_celery": "y",
+    "use_debug_toolbar": "y",
+    "use_sentry": "y",
+    "use_structlog": "y"
+}

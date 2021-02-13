@@ -1,0 +1,27 @@
+-r site.in
+
+freezegun
+{% if cookiecutter.test_runner == "pytest" -%}
+pytest
+pytest-django
+{%- if cookiecutter.use_black == "y" %}
+pytest-black
+{%- endif %}
+pytest-factoryboy
+{%- if cookiecutter.code_checker == "flake8" %}
+pytest-flake8
+{%- endif %}
+{%- if cookiecutter.code_checker == "pylama" %}
+pytest-pylama
+{%- endif %}
+{%- if cookiecutter.use_isort == "y" %}
+pytest-isort
+{%- endif %}
+{%- if cookiecutter.use_coverage == "y" %}
+pytest-cov
+{%- endif %}
+{%- endif %}
+
+{% if cookiecutter.use_coverage == "y" and cookiecutter.test_runner != "pytest" -%}
+coverage
+{%- endif %}

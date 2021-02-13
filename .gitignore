@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[co]
+*.egg*
+
+# Editor temp files
+*~
+
+# Ignore dot files except those required for the project
+.*
+!.bumpversion.cfg
+!.cookiecutterrc
+!.editorconfig
+!.env
+!.envrc
+!.gitignore
+!.gitkeep
+!.readthedocs.yml
+
+# Development artefacts
+output
+
+# Any local makefiles
+*.mk

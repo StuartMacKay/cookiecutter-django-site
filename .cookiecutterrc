@@ -1,0 +1,11 @@
+# .cookiecutterrc
+#
+# The default_context contains definitions for the project specific variables
+# in cookiecutter.json.
+#
+
+default_context:
+    author: D. Veloper
+    author_email: developer@example.com
+    test_runner: pytest
+    cms: wagtail

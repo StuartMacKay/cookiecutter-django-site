@@ -1,0 +1,34 @@
+{% raw %}{% load static %}{% endraw %}
+{%- if cookiecutter.cms == "wagtail" %}{% raw %}{% load wagtailuserbar %}{% endraw %}{%- endif %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+{%- if cookiecutter.cms == "wagtail" %}{% raw %}
+    <title>
+      {% block title %}
+        {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+      {% endblock %}
+      {% block title_suffix %}
+        {% with self.get_site.site_name as site_name %}
+          {% if site_name %}- {{ site_name }}{% endif %}
+        {% endwith %}
+      {% endblock %}
+    </title>
+{% endraw %}{% else %}{% raw %}
+    <title>
+      {% block title %}{% endblock %}
+    </title>
+{% endraw %}{%- endif %}
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="{% raw %}{% static{% endraw %} 'css/{{ cookiecutter.site_app }}.css' {% raw %}%}{% endraw %}">
+    {% raw %}{% block extra_css %}{% endblock %}{% endraw %}
+  </head>
+  <body class="{% block body_class %}{% endblock %}">
+    {%- if cookiecutter.cms == "wagtail" %}{% raw %}{% wagtailuserbar %}{% endraw %}{%- endif %}
+    {% raw %}{% block content %}{% endblock %}{% endraw %}
+    <script type="text/javascript" src="{% raw %}{% static{% endraw %} 'js/{{ cookiecutter.site_app }}.js' {% raw %}%}{% endraw %}"></script>
+    {% raw %}{% block extra_js %}{% endblock %}{% endraw %}
+  </body>
+</html>

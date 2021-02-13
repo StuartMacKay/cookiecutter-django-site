@@ -1,0 +1,23 @@
+-r site.in
+{%- if cookiecutter.test_runner == "pytest" %}
+-r tests.in
+{%- endif %}
+{%- if cookiecutter.use_readthedocs == "y" %}
+-r docs.in
+{%- endif %}
+
+# bumpversion is no longer maintained so we use bump2version until the
+# point where bump2version emerges as the official bumpversion, see
+# https://github.com/c4urself/bump2version/issues/86
+
+{% if cookiecutter.use_bumpversion == "y" -%}
+bump2version
+{%- endif %}
+{% if cookiecutter.use_structlog == "y" -%}
+colorama
+{%- endif %}
+{% if cookiecutter.use_debug_toolbar == "y" -%}
+django-debug-toolbar
+{%- endif %}
+
+tox
