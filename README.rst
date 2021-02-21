@@ -219,7 +219,7 @@ See the `ROADMAP.rst`_ for details on what's coming.
 .. _black: https://black.readthedocs.io/en/stable/
 .. _bump2version: https://github.com/c4urself/bump2version
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _CHANGELOG.rst: https://github.com/StuartMacKay/cookiecutter-django-library/blob/master/CHANGELOG.rst
+.. _CHANGELOG.rst: https://github.com/StuartMacKay/cookiecutter-django-site/blob/master/CHANGELOG.rst
 .. _Celery: https://docs.celeryproject.org/en/stable/index.html
 .. _colorama: https://github.com/tartley/colorama
 .. _direnv: https://direnv.net/
@@ -235,7 +235,7 @@ See the `ROADMAP.rst`_ for details on what's coming.
 .. _pylama: https://pylama.readthedocs.io/en/latest/
 .. _pytest: https://docs.pytest.org/en/stable/
 .. _Read the Docs: https://readthedocs.org/
-.. _ROADMAP.rst: https://github.com/StuartMacKay/cookiecutter-django-library/blob/master/ROADMAP.rst
+.. _ROADMAP.rst: https://github.com/StuartMacKay/cookiecutter-django-site/blob/master/ROADMAP.rst
 .. _Sentry: https://sentry.io/
 .. _Signing Your Work: https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work
 .. _structlog: https://www.structlog.org/en/stable/
