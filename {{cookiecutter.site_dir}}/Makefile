@@ -80,7 +80,7 @@ help:
 {%- if cookiecutter.use_readthedocs == "y" %}
 	@echo "  docs                 to build the HTML documentation"
 {%- endif %}
-	@echo "  install              to install the dependencies in the virtualenv"
+	@echo "  install              to install or update the dependencies in the virtualenv"
 {%- if cookiecutter.use_bumpversion == "y" %}
 	@echo "  major                to update the version number for a major release, e.g. 2.1 to 3.0"
 {%- endif %}
@@ -124,6 +124,12 @@ clean-venv:
 .PHONY: clean
 clean: clean-tests clean-coverage{% if cookiecutter.use_readthedocs == "y" %} clean-docs{% endif %}
 
+$(pip):
+	$(pip) install --upgrade pip setuptools wheel
+
+$(pip-compile): $(pip)
+	$(pip) install pip-tools
+
 .PHOMY: checks
 checks:
 	$(checker) $(site_dir)
@@ -152,13 +158,7 @@ docs:
 {%- endif %}
 
 .PHONY: install
-install:
-	$(pip) install --upgrade pip setuptools wheel
-	$(pip) install pip-tools
-	test -f requirements/dev.txt || $(pip-compile) requirements/dev.in
-	test -f requirements/docs.txt || $(pip-compile) requirements/docs.in
-	test -f requirements/site.txt || $(pip-compile) requirements/site.in
-	test -f requirements/tests.txt || $(pip-compile) requirements/tests.in
+install: venv $(pip-compile) requirements
 	$(pip-sync) requirements/dev.txt
 
 .PHONY: major
@@ -185,6 +185,17 @@ minor:
 patch:
 	$(bumpversion) patch
 
+requirements/dev.txt: requirements/*.in
+	$(pip-compile) requirements/dev.in
+
+requirements/docs.txt: requirements/docs.in
+	$(pip-compile) requirements/docs.in
+
+requirements/tests.txt: requirements/tests.in
+	$(pip-compile) requirements/tests.in
+
+requirements: requirements/*.txt
+
 .PHONY: runserver
 runserver: venv
 	$(django) migrate
@@ -203,5 +214,8 @@ test-all: test
 	$(tox)
 	{% if cookiecutter.use_readthedocs == "y" %}tox -e docs{% endif %}
 
-venv:
+$(venv_dir):
 	$(site_python) -m venv $(venv_dir)
+
+.PHONY: venv
+venv: $(venv_dir)
