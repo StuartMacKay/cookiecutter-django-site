@@ -54,7 +54,7 @@ help:
 	@echo "  clean-tests        to clean the directories created during testing"
 	@echo "  clean-venv         to clean the virtualenv"
 	@echo "  bake               to run cookiecutter and generate the project"
-	@echo "  install            to install the dependencies"
+	@echo "  install            to install or update the dependencies"
 	@echo "  major              to update the version number for a major release, e.g. 2.1 to 3.0"
 	@echo "  minor              to update the version number for a minor release, e.g. 2.1 to 2.2"
 	@echo "  patch              to update the version number for a patch release, e.g. 2.1.1 to 2.1.2"
@@ -75,6 +75,12 @@ clean-tests:
 clean-venv:
 	rm -rf $(venv_dir)
 
+$(pip):
+	$(pip) install --upgrade pip setuptools wheel
+
+$(pip-compile): $(pip)
+	$(pip) install pip-tools
+
 .PHONY: bake
 bake:
 	$(cookiecutter) . \
@@ -84,9 +90,7 @@ bake:
 	    --output-dir $(output_dir)
 
 .PHONY: install
-install:
-	$(pip) install --upgrade pip setuptools wheel
-	$(pip) install pip-tools
+install: venv $(pip-compile) requirements
 	$(pip-sync) requirements/dev.txt
 
 .PHONY: major
@@ -101,10 +105,23 @@ minor:
 patch:
 	$(bumpversion) patch
 
+requirements/dev.txt: requirements/*.in
+	$(pip-compile) requirements/dev.in
+
+requirements/docs.txt: requirements/docs.in
+	$(pip-compile) requirements/docs.in
+
+requirements/tests.txt: requirements/tests.in
+	$(pip-compile) requirements/tests.in
+
+requirements: requirements/*.txt
+
 .PHONY: test
 test:
 	$(tox)
 
-.PHONY: venv
-venv:
+$(venv_dir):
 	$(site_python) -m venv $(venv_dir)
+
+.PHONY: venv
+venv: $(venv_dir)
