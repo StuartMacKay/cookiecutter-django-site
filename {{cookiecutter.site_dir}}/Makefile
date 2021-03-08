@@ -134,10 +134,10 @@ $(pip-compile): $(pip)
 checks:
 	$(checker) $(site_dir)
 	{%- if cookiecutter.use_black %}
-	black --check $(site_dir)
+	$(black) --check $(site_dir)
 	{%- endif %}
 	{%- if cookiecutter.use_isort %}
-	isort --check $(site_dir)
+	$(isort) --check $(site_dir)
 	{%- endif %}
 
 {% if cookiecutter.use_coverage == "y" -%}
