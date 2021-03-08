@@ -130,7 +130,7 @@ $(pip):
 $(pip-compile): $(pip)
 	$(pip) install pip-tools
 
-.PHOMY: checks
+.PHONY: checks
 checks:
 	$(checker) $(site_dir)
 	{%- if cookiecutter.use_black %}
