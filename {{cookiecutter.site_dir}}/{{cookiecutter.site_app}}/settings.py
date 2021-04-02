@@ -162,24 +162,6 @@ CACHES = {
         "LOCATION": "site",
     }
 }
-{% if cookiecutter.use_celery == "y" -%}
-
-
-# ##########
-#   CELERY
-# ##########
-
-# This configuration relies on the task_create_missing_queues setting
-# to create the queues used by the tasks automatically.
-
-CELERY_BROKER_URL = os.environ['CELERY_BROKER_URL']
-
-CELERY_TASK_ALWAYS_EAGER = not CELERY_BROKER_URL
-
-CELERY_ACCEPT_CONTENT = ['json']
-
-CELERYD_WORKER_HIJACK_ROOT_LOGGER = False
-{%- endif %}
 
 
 # ############
