@@ -76,18 +76,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-{%- if cookiecutter.use_debug_toolbar == "y" %}
-    "debug_toolbar",
-{%- endif %}
 {%- if cookiecutter.use_celery == "y" %}
     "django_celery_beat",
 {%- endif %}
 ]
 
 MIDDLEWARE = [
-{%- if cookiecutter.use_debug_toolbar == "y" %}
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
-{%- endif %}
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -104,6 +98,18 @@ MIDDLEWARE = [
     "django_structlog.middlewares.CeleryMiddleware",
 {%- endif %}
 ]
+{%- if cookiecutter.use_debug_toolbar == "y" %}
+
+if ENV == "dev":
+    INSTALLED_APPS += [
+        "debug_toolbar",
+    ]
+
+    MIDDLEWARE = [
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+    ] + MIDDLEWARE
+{%- endif %}
+
 
 
 # ##############

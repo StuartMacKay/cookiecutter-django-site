@@ -1,11 +1,6 @@
 from django.conf import settings
 from django.urls import include, path
 from django.contrib import admin
-{%- if cookiecutter.use_debug_toolbar == "y" %}
-
-import debug_toolbar
-{%- endif %}
-
 {%- if cookiecutter.cms == "wagtail" %}
 
 from wagtail.admin import urls as wagtailadmin_urls
@@ -33,14 +28,20 @@ if settings.DEBUG:
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-{%- if cookiecutter.use_sentry %}
+{%- if cookiecutter.use_debug_toolbar == "y" or cookiecutter.use_sentry == "" %}
 
 if settings.ENV == "dev":
+{%- if cookiecutter.use_debug_toolbar == "y" %}
+    import debug_toolbar
+{%- endif %}
+{%- if cookiecutter.use_debug_toolbar == "y" %}
+
     # Add a view that raises and error to test sentry in development
     def trigger_error(request):
         raise Exception("Verify Sentry is configured and working")
 
     urlpatterns += [path("__debug__/sentry/", trigger_error)]
+{%- endif %}
 {%- if cookiecutter.use_debug_toolbar == "y" %}
     urlpatterns += [path("__debug__/toolbar/", include(debug_toolbar.urls))]
 {%- endif %}
