@@ -63,4 +63,10 @@ DJANGO_SETTINGS_MODULE = "{{ cookiecutter.site_app }}.settings"
 testpaths = [
     "{{ cookiecutter.site_app }}"
 ]
+{%- if cookiecutter.use_isort == "y" %}
+
+isort_ignore = [
+    "*migrations/*.py"
+]
+{%- endif %}
 {%- endif %}
