@@ -38,9 +38,6 @@ pytest = $(venv_dir)/bin/pytest
 {%- if cookiecutter.use_coverage == "y" %}
 coverage = $(venv_dir)/bin/coverage
 {%- endif %}
-{%- if cookiecutter.use_bumpversion == "y" %}
-bumpversion = $(venv_dir)/bin/bump2version
-{%- endif %}
 tox = $(venv_dir)/bin/tox
 twine = $(venv_dir)/bin/twine
 
@@ -81,16 +78,9 @@ help:
 	@echo "  docs                 to build the HTML documentation"
 {%- endif %}
 	@echo "  install              to install or update the dependencies in the virtualenv"
-{%- if cookiecutter.use_bumpversion == "y" %}
-	@echo "  major                to update the version number for a major release, e.g. 2.1 to 3.0"
-{%- endif %}
 	@echo "  messages             to run the makemessages and compilemessages management commands"
 	@echo "  migrate              to run the migrate management command"
 	@echo "  migrations           to run the makemigrations management command"
-{%- if cookiecutter.use_bumpversion == "y" %}
-	@echo "  minor                to update the version number for a minor release, e.g. 2.1 to 2.2"
-	@echo "  patch                to update the version number for a patch release, e.g. 2.1.1 to 2.1.2"
-{%- endif %}
 	@echo "  runserver            to run the runserver management command"
 	@echo "  test                 to run the tests during development"
 	@echo "  test-all             to run the tests for all the supported environments"
@@ -161,10 +151,6 @@ docs:
 install: venv $(pip-compile) requirements
 	$(pip-sync) requirements/dev.txt
 
-.PHONY: major
-major:
-	$(bumpversion) major
-
 .PHONY: messages
 messages:
 	$(django) makemessages --no-obsolete --all && $(django) compilemessages --ignore .venv
@@ -176,14 +162,6 @@ migrate:
 .PHONY: migrations
 migrations:
 	$(django) makemigrations
-
-.PHONY: minor
-minor:
-	$(bumpversion) minor
-
-.PHONY: patch
-patch:
-	$(bumpversion) patch
 
 requirements/dev.txt: requirements/*.in
 	$(pip-compile) requirements/dev.in

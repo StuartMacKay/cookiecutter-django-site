@@ -19,7 +19,6 @@ Features
 * Automatically add project configuration to `PyCharm`_.
 * Automatically activate the virtualenv with `direnv`_.
 * Manage package versions and the virtualenv with `pip-tools`_.
-* Manage version number updates with `bump2version`_.
 * Manage repetitive project tasks with `make`_.
 * Configure the site to use a CMS such as `Wagtail`_
 * Configure the site to run background and periodic tasks with `Celery`_.
@@ -133,11 +132,6 @@ To generate the project you will be asked for the following fields, in order:
       - y
       - Use isort for organising the import statements in your source files.
 
-    * - use_bumpversion
-      - y
-      - Use bump2version to managing incrementing the version numbers, found
-        in various files, when you do a release.
-
     * - use_readthedocs
       - y
       - Generate project documentation, using Sphinx, that can be hosted on
@@ -157,15 +151,6 @@ To generate the project you will be asked for the following fields, in order:
         * other
 
         The theme is only used if ``use_readthedocs`` is set.
-
-    * - sign_commits
-      - y
-      - Sign commits with a GPG key. Used by bump2version. Read `Signing Your Work`_
-        for a good explanation on why you should do it and how.
-
-    * - sign_tags
-      - y
-      - Sign tags with a GPG key. Used by bump2version.
 
     * - test_runner
       - django
@@ -217,7 +202,6 @@ Roadmap
 See the `ROADMAP.rst`_ for details on what's coming.
 
 .. _black: https://black.readthedocs.io/en/stable/
-.. _bump2version: https://github.com/c4urself/bump2version
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _CHANGELOG.rst: https://github.com/StuartMacKay/cookiecutter-django-site/blob/master/CHANGELOG.rst
 .. _Celery: https://docs.celeryproject.org/en/stable/index.html
