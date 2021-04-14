@@ -12,6 +12,7 @@ CREATE_REPOSITORY = "{{ cookiecutter.repository_url }}" != ""
 USE_PYCHARM = "{{ cookiecutter.ide }}" == "pycharm"
 USE_PYTEST = "{{ cookiecutter.test_runner}}" == "pytest"
 USE_READTHEDOCS = "{{ cookiecutter.use_readthedocs}}" == "y"
+USE_GITHUB_ACTIONS = "{{ cookiecutter.ci }}" == "github-actions"
 USE_WAGTAIL = "{{ cookiecutter.cms }}" == "wagtail"
 USE_CELERY = "{{ cookiecutter.use_celery }}" == "y"
 
@@ -68,6 +69,9 @@ def cleanup():
         remove("requirements/docs.in")
         remove("requirements/docs.txt")
         remove(".readthedocs.yml")
+
+    if not USE_GITHUB_ACTIONS:
+        remove(".github")
 
     if not USE_WAGTAIL:
         remove(".dockerignore")

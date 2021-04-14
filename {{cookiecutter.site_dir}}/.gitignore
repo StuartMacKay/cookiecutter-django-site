@@ -11,6 +11,7 @@ __pycache__/
 !.dockerignore
 !.editorconfig
 !.envrc
+!.github
 !.gitignore
 !.gitkeep
 {% if cookiecutter.use_readthedocs == "y" %}!.readthedocs.yml{% endif %}

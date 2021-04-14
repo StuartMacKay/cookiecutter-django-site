@@ -5,7 +5,20 @@ import pytest
 
 CONTEXT = {
     "test_runner": "pytest",
+    "use_celery": "n",
 }
+
+env = os.environ.copy()
+env["ENV"] = "dev"
+env["ALLOWED_HOSTS"] = "localhost"
+env["DEBUG"] = "false"
+env["DEFAULT_FROM_EMAIL"] = "noreply@example.com"
+env["DJANGO_SECRET_KEY"] = "secret"
+env["DJANGO_SITE_ID"] = "1"
+env["LOG_FORMATTER"] = "console"
+env["LOG_LEVEL"] = "ERROR"
+env["SENTRY_ENABLED"] = "false"
+
 
 # None of the calls to subprocess.run() pass capture_output=True. There
 # is no need if the test is passing and it's easily added if the test
@@ -31,12 +44,12 @@ def test_run_migrations(project):
     python = os.path.join(project, ".venv", "bin", "python")
     db = os.path.join(project, "db.sqlite3")
     assert not os.path.exists(db)
-    subprocess.run([python, "manage.py", "migrate"], cwd=project, check=True)
+    subprocess.run([python, "manage.py", "migrate"], cwd=project, check=True, env=env)
     assert os.path.exists(db)
 
 
 def test_run_tests(project):
     """Verify the tests run successfully, including black, flake8 and isort checks"""
-    runner = os.path.join(project, "venv", "bin", "pytest")
-    subprocess.run([runner], cwd=project, check=True)
+    runner = os.path.join(project, ".venv", "bin", "pytest")
+    subprocess.run([runner, "tests"], cwd=project, check=True, env=env)
 

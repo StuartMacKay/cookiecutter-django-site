@@ -46,6 +46,11 @@
         "other"
     ],
 
+    "ci": [
+      "github-actions",
+      "other"
+    ],
+
     "cms": [
         "none",
         "wagtail"

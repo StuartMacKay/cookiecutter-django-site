@@ -100,7 +100,7 @@ MIDDLEWARE = [
 ]
 {%- if cookiecutter.use_debug_toolbar == "y" %}
 
-if ENV == "dev":
+if ENV == "dev" and DEBUG:
     INSTALLED_APPS += [
         "debug_toolbar",
     ]

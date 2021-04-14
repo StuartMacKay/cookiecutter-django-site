@@ -30,7 +30,7 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 {%- if cookiecutter.use_debug_toolbar == "y" or cookiecutter.use_sentry == "" %}
 
-if settings.ENV == "dev":
+if settings.ENV == "dev" and settings.DEBUG:
 {%- if cookiecutter.use_debug_toolbar == "y" %}
     import debug_toolbar
 {%- endif %}

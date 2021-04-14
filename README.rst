@@ -28,6 +28,7 @@ Features
 * Run tests for all supported environments using `tox`_.
 * Publish documentation to `Read the Docs`_.
 * Profile and debug requests using `django-debug-toolbar`_.
+* Testing pushes and pull requests with `GitHub Actions`_.
 
 Quick start
 ===========
@@ -214,6 +215,7 @@ See the `ROADMAP.rst`_ for details on what's coming.
 .. _django-debug-toolbar: https://github.com/jazzband/django-debug-toolbar
 .. _django-structlog: https://github.com/jrobichaud/django-structlog
 .. _flake8: https://flake8.pycqa.org/en/latest/
+.. _GitHub Actions: https://docs.github.com/en/actions
 .. _isort: https://pycqa.github.io/isort/
 .. _make: https://www.gnu.org/software/make/manual/html_node/index.html
 .. _PEP 0314: https://www.python.org/dev/peps/pep-0314/

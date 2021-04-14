@@ -9,5 +9,5 @@ def test_bake_project(cookies):
     result = cookies.bake(extra_context=CONTEXT)
     assert result.exit_code == 0
     assert result.exception is None
-    assert result.project.basename == "site"
+    assert result.project.basename == "mysite"
     assert result.project.isdir()

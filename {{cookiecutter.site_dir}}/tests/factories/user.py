@@ -1,7 +1,7 @@
 from django.contrib.auth import models
 
 import factory
-from faker import Fake
+from faker import Faker
 
 fake = Faker()
 
