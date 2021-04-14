@@ -4,7 +4,7 @@
 # Usage:
 #
 #    make clean
-#    make checks
+#    make lint
 #    make test-all
 #    make patch
 
@@ -23,8 +23,8 @@ pip = $(venv_dir)/bin/pip3
 pip-compile = $(venv_dir)/bin/pip-compile
 pip-sync = $(venv_dir)/bin/pip-sync
 django = $(python) $(root_dir)/manage.py
-{%- if cookiecutter.code_checker in ["flake8", "pylama"] %}
-checker = $(venv_dir)/bin/{{ cookiecutter.code_checker }}
+{%- if cookiecutter.code_linter in ["flake8", "pylama"] %}
+linter = $(venv_dir)/bin/{{ cookiecutter.code_linter }}
 {%- endif %}
 {%- if cookiecutter.use_black == "y" %}
 black = $(venv_dir)/bin/black
@@ -45,8 +45,8 @@ twine = $(venv_dir)/bin/twine
 commit_opts :={% if cookiecutter.sign_commits %} --gpg-sign{% endif %}
 {%- if cookiecutter.test_runner == "pytest" %}
 {%- set opts = [] %}
-{%- if cookiecutter.code_checker == "flake8" %}{{ opts.append("--flake8") or "" }}{% endif %}
-{%- if cookiecutter.code_checker == "pylama" %}{{ opts.append("--pylama") or "" }}{% endif %}
+{%- if cookiecutter.code_linter == "flake8" %}{{ opts.append("--flake8") or "" }}{% endif %}
+{%- if cookiecutter.code_linter == "pylama" %}{{ opts.append("--pylama") or "" }}{% endif %}
 {%- if cookiecutter.use_black == "y" %}{{ opts.append("--black") or "" }}{% endif %}
 {%- if cookiecutter.use_isort == "y" %}{{ opts.append("--isort") or "" }}{% endif %}
 pytest_opts := {{ opts|join(" ")}}
@@ -70,7 +70,7 @@ help:
 	@echo "  clean-venv           to clean the virtualenv"
 	@echo "  clean                to clean everything EXCEPT the virtualenv"
 	@echo
-	@echo "  checks               to run quality code checks"
+	@echo "  lint                 to run quality code checks"
 {%- if cookiecutter.use_coverage == "y" %}
 	@echo "  coverage             to measure the test coverage"
 {%- endif %}
@@ -120,9 +120,9 @@ $(pip):
 $(pip-compile): $(pip)
 	$(pip) install pip-tools
 
-.PHONY: checks
-checks:
-	$(checker) $(site_dir)
+.PHONY: lint
+lint:
+	$(linter) $(site_dir)
 	{%- if cookiecutter.use_black %}
 	$(black) --check $(site_dir)
 	{%- endif %}

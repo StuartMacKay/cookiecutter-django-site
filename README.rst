@@ -119,7 +119,7 @@ To generate the project you will be asked for the following fields, in order:
         PyCharm is configured with targets for running the site, celery and celery beat.
         You will need to install a plugin for .env files.
 
-    * - code_checker
+    * - code_linter
       - flake8
       - Tools for checking code quality. The list of choices includes:
 

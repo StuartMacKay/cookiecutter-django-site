@@ -161,7 +161,7 @@ defaults. Here is the file that's used to generate the reference
         python_version: "3.8"
         author: "Stuart MacKay"
         author_email: "smackay@flagstonesoftware.com"
-        code_checker: "flake8"
+        code_linter: "flake8"
         test_runner: "pytest"
 
 Now you can run cookiecutter using the following::

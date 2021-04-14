@@ -8,10 +8,10 @@ pytest-django
 pytest-black
 {%- endif %}
 pytest-factoryboy
-{%- if cookiecutter.code_checker == "flake8" %}
+{%- if cookiecutter.code_linter == "flake8" %}
 pytest-flake8
 {%- endif %}
-{%- if cookiecutter.code_checker == "pylama" %}
+{%- if cookiecutter.code_linter == "pylama" %}
 pytest-pylama
 {%- endif %}
 {%- if cookiecutter.use_isort == "y" %}

@@ -18,7 +18,7 @@
         "other"
     ],
 
-    "code_checker": [
+    "code_linter": [
         "flake8",
         "pylama",
         "other"
