@@ -77,7 +77,7 @@ help:
 {%- if cookiecutter.use_readthedocs == "y" %}
 	@echo "  docs                 to build the HTML documentation"
 {%- endif %}
-	@echo "  install              to install or update the dependencies in the virtualenv"
+	@echo "  deps                 to install or update the dependencies in the virtualenv"
 	@echo "  messages             to run the makemessages and compilemessages management commands"
 	@echo "  migrate              to run the migrate management command"
 	@echo "  migrations           to run the makemigrations management command"
@@ -147,8 +147,8 @@ docs:
 	cd docs && make html
 {%- endif %}
 
-.PHONY: install
-install: venv $(pip-compile) requirements
+.PHONY: deps
+deps: venv $(pip-compile) requirements
 	$(pip-sync) requirements/dev.txt
 
 .PHONY: messages
